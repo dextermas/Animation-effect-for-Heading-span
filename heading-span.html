@@ -1,0 +1,79 @@
+!<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Heading Span FadeIn</title>
+	<style type="text/css">
+		div{
+		  height: 1100px;
+		}
+
+		span{
+		  display: block;
+		}
+		h2 span {
+		    opacity: 0;
+		}
+		h2 span.fade-in-down {
+		    animation: fade-in-down 1.5s ease-in-out forwards;
+		    opacity: 0;
+		}
+		  @keyframes fade-in-down {
+		  from {
+		    opacity: 0;
+		    transform: translate3d(0, -100%, 0);
+		  }
+		  to {
+		    opacity: 1;
+		    transform: translate3d(0, 0, 0);
+		  }
+		}
+	</style>
+</head>
+<body>
+<div>
+</div>
+
+
+<section class="sample__section"><!-- add this parent as selector -->
+  <h2>Contact Us Today <span>for a Free Roof Coating Estimate!</span></h2>
+</section>
+<div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+  $(window).on('scroll', function(){
+    var targets = [
+      {
+        selector: '.sample__section h2 span',//add here the parent selector
+        className: 'fade-in-down'
+      },
+      {
+        selector: '.contact__us-section .et_pb_text_inner h2 span',
+        className: 'fade-in-down'
+      },
+      {
+        selector: '.testimonial__section .et_pb_text_inner h2 span',
+        className: 'fade-in-down'
+      }
+    ];
+    
+    targets.forEach(function(target) {
+      var element = $(target.selector);
+      var targetPos = element.offset().top;
+      var winHeight = $(window).height();
+      var scrollToElem = targetPos - winHeight;
+      var winScrollTop = $(this).scrollTop();
+      if (winScrollTop > scrollToElem) {
+        element.addClass('animated ' + target.className);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
